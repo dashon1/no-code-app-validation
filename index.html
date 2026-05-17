@@ -1,0 +1,2897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No-Code App Validation Sheet | Validate Your App Idea Before You Build</title>
+    <meta name="description" content="Find out if your app idea is worth building before you spend weeks on it. 8 powerful validation tools in one interactive sheet.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ============================================
+           CSS CUSTOM PROPERTIES - DESIGN SYSTEM
+           ============================================ */
+        :root {
+            /* Primary Colors */
+            --color-primary: #6366F1;
+            --color-primary-dark: #4F46E5;
+            --color-primary-light: #818CF8;
+            --color-primary-bg: #EEF2FF;
+            
+            /* Secondary Colors */
+            --color-secondary: #10B981;
+            --color-secondary-dark: #059669;
+            --color-secondary-light: #34D399;
+            --color-secondary-bg: #ECFDF5;
+            
+            /* Accent Colors */
+            --color-accent: #F59E0B;
+            --color-accent-dark: #D97706;
+            --color-accent-light: #FBBF24;
+            --color-accent-bg: #FFFBEB;
+            
+            /* Danger/Warning */
+            --color-danger: #EF4444;
+            --color-danger-bg: #FEF2F2;
+            --color-warning: #F59E0B;
+            --color-warning-bg: #FFFBEB;
+            --color-success: #10B981;
+            --color-success-bg: #ECFDF5;
+            
+            /* Neutrals */
+            --color-dark: #1E293B;
+            --color-dark-secondary: #334155;
+            --color-text: #1E293B;
+            --color-text-secondary: #64748B;
+            --color-text-muted: #94A3B8;
+            --color-border: #E2E8F0;
+            --color-bg: #FFFFFF;
+            --color-bg-secondary: #F8FAFC;
+            --color-bg-tertiary: #F1F5F9;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            
+            /* Typography */
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+            
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            
+            /* Border Radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            --radius-full: 9999px;
+            
+            /* Transitions */
+            --transition-fast: 150ms ease;
+            --transition-base: 200ms ease;
+            --transition-slow: 300ms ease;
+        }
+
+        /* ============================================
+           BASE STYLES & RESET
+           ============================================ */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--color-text);
+            background-color: var(--color-bg);
+            overflow-x: hidden;
+        }
+
+        /* ============================================
+           UTILITY CLASSES
+           ============================================ */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--space-lg);
+        }
+
+        .container-narrow {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 var(--space-lg);
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--color-border);
+            z-index: 1000;
+            transition: var(--transition-base);
+        }
+
+        .navbar.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+
+        .navbar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        .navbar-logo i {
+            font-size: 1.5rem;
+        }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xl);
+            list-style: none;
+        }
+
+        .navbar-links a {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9375rem;
+            transition: var(--transition-fast);
+        }
+
+        .navbar-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .navbar-cta {
+            background: var(--color-primary);
+            color: white !important;
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: var(--radius-full);
+            transition: var(--transition-fast);
+        }
+
+        .navbar-cta:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--color-text);
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-links {
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero {
+            padding: calc(72px + var(--space-3xl)) 0 var(--space-3xl);
+            background: linear-gradient(135deg, var(--color-primary-bg) 0%, var(--color-bg) 50%, var(--color-secondary-bg) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            background: var(--color-primary);
+            color: white;
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-full);
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: var(--space-lg);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: var(--space-lg);
+            background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.125rem, 2vw, 1.375rem);
+            color: var(--color-text-secondary);
+            max-width: 680px;
+            margin: 0 auto var(--space-xl);
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            justify-content: center;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-xl);
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition-base);
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--color-text);
+            border: 2px solid var(--color-border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .btn-lg {
+            padding: var(--space-lg) var(--space-2xl);
+            font-size: 1.125rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-2xl);
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--color-primary);
+        }
+
+        .hero-stat-label {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+        }
+
+        /* ============================================
+           PROBLEM SECTION
+           ============================================ */
+        .problem-section {
+            padding: var(--space-3xl) 0;
+            background: var(--color-bg-secondary);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-sm);
+        }
+
+        .section-title {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: var(--space-md);
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--color-text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .problem-card {
+            background: white;
+            padding: var(--space-xl);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--color-border);
+            transition: var(--transition-base);
+        }
+
+        .problem-card:hover {
+            border-color: var(--color-danger);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .problem-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--color-danger-bg);
+            color: var(--color-danger);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .problem-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+
+        .problem-description {
+            color: var(--color-text-secondary);
+            font-size: 0.9375rem;
+        }
+
+        /* ============================================
+           VALIDATION TOOLS SECTION
+           ============================================ */
+        .tools-section {
+            padding: var(--space-3xl) 0;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .tool-card {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            transition: var(--transition-base);
+        }
+
+        .tool-card:hover {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-xl);
+            transform: translateY(-4px);
+        }
+
+        .tool-card-header {
+            padding: var(--space-xl);
+            background: linear-gradient(135deg, var(--color-primary-bg) 0%, white 100%);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .tool-card-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: var(--color-primary);
+            color: white;
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .tool-card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+
+        .tool-card-description {
+            color: var(--color-text-secondary);
+            font-size: 0.9375rem;
+        }
+
+        .tool-card-body {
+            padding: var(--space-xl);
+        }
+
+        .tool-card-features {
+            list-style: none;
+        }
+
+        .tool-card-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-sm);
+            padding: var(--space-sm) 0;
+            font-size: 0.9375rem;
+            color: var(--color-text-secondary);
+        }
+
+        .tool-card-features li i {
+            color: var(--color-success);
+            margin-top: 0.25rem;
+        }
+
+        .bonus-bar {
+            background: linear-gradient(135deg, var(--color-accent-bg) 0%, var(--color-secondary-bg) 100%);
+            padding: var(--space-lg) var(--space-xl);
+            border-radius: var(--radius-lg);
+            margin-top: var(--space-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .bonus-bar i {
+            font-size: 1.5rem;
+            color: var(--color-accent);
+        }
+
+        .bonus-bar-text {
+            font-size: 0.9375rem;
+            color: var(--color-text);
+        }
+
+        .bonus-bar-text strong {
+            color: var(--color-accent-dark);
+        }
+
+        /* ============================================
+           LIVE VALIDATION TOOL
+           ============================================ */
+        .validator-section {
+            padding: var(--space-3xl) 0;
+            background: var(--color-bg-secondary);
+        }
+
+        .validator-container {
+            background: white;
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-2xl);
+            overflow: hidden;
+        }
+
+        .validator-header {
+            padding: var(--space-xl);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            color: white;
+        }
+
+        .validator-tabs {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+        }
+
+        .validator-tab {
+            padding: var(--space-sm) var(--space-md);
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: var(--radius-md);
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            font-size: 0.875rem;
+        }
+
+        .validator-tab:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .validator-tab.active {
+            background: white;
+            color: var(--color-primary);
+        }
+
+        .validator-body {
+            padding: var(--space-xl);
+        }
+
+        .validator-panel {
+            display: none;
+        }
+
+        .validator-panel.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .panel-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+
+        .panel-description {
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-xl);
+        }
+
+        /* ============================================
+           FORM ELEMENTS
+           ============================================ */
+        .form-group {
+            margin-bottom: var(--space-lg);
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: var(--color-text);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--space-md);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: var(--transition-fast);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: var(--color-text-muted);
+        }
+
+        textarea.form-input {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-hint {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-top: var(--space-xs);
+        }
+
+        /* Checklist Styles */
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: var(--color-bg-secondary);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-sm);
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .checklist-item:hover {
+            background: var(--color-bg-tertiary);
+        }
+
+        .checklist-item.checked {
+            background: var(--color-success-bg);
+        }
+
+        .checklist-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: var(--transition-fast);
+        }
+
+        .checklist-item.checked .checklist-checkbox {
+            background: var(--color-success);
+            border-color: var(--color-success);
+            color: white;
+        }
+
+        .checklist-content {
+            flex: 1;
+        }
+
+        .checklist-title {
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+        }
+
+        .checklist-description {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+        }
+
+        /* Score Input */
+        .score-input-group {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .score-slider {
+            flex: 1;
+            height: 8px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: var(--color-bg-tertiary);
+            border-radius: var(--radius-full);
+            outline: none;
+        }
+
+        .score-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: var(--color-primary);
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+        }
+
+        .score-value {
+            min-width: 48px;
+            height: 48px;
+            background: var(--color-primary);
+            color: white;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+
+        .score-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: var(--space-xs);
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+        }
+
+        /* Competitor Grid */
+        .competitor-grid {
+            display: grid;
+            gap: var(--space-lg);
+        }
+
+        .competitor-card {
+            background: var(--color-bg-secondary);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            border: 2px solid var(--color-border);
+        }
+
+        .competitor-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-md);
+        }
+
+        .competitor-name-input {
+            font-size: 1.125rem;
+            font-weight: 600;
+            border: none;
+            background: transparent;
+            width: 100%;
+            max-width: 250px;
+        }
+
+        .competitor-name-input:focus {
+            outline: none;
+            border-bottom: 2px solid var(--color-primary);
+        }
+
+        .remove-competitor {
+            color: var(--color-danger);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.25rem;
+        }
+
+        .competitor-strengths {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+        }
+
+        .strength-tag {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--color-success-bg);
+            color: var(--color-success);
+            border-radius: var(--radius-sm);
+            font-size: 0.875rem;
+        }
+
+        .add-competitor-btn {
+            width: 100%;
+            padding: var(--space-md);
+            background: var(--color-bg-secondary);
+            border: 2px dashed var(--color-border);
+            border-radius: var(--radius-lg);
+            color: var(--color-text-secondary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .add-competitor-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        /* Landing Page Copy Generator */
+        .copy-section {
+            margin-bottom: var(--space-xl);
+        }
+
+        .copy-section-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .copy-section-title i {
+            color: var(--color-primary);
+        }
+
+        .generated-copy {
+            background: var(--color-bg-secondary);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            border-left: 4px solid var(--color-primary);
+        }
+
+        .generated-copy-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-muted);
+            margin-bottom: var(--space-sm);
+        }
+
+        .generated-copy-text {
+            font-size: 1.125rem;
+            line-height: 1.6;
+        }
+
+        /* Pricing Calculator */
+        .pricing-option {
+            background: var(--color-bg-secondary);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            border: 2px solid var(--color-border);
+            margin-bottom: var(--space-md);
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .pricing-option:hover {
+            border-color: var(--color-primary);
+        }
+
+        .pricing-option.selected {
+            border-color: var(--color-primary);
+            background: var(--color-primary-bg);
+        }
+
+        .pricing-option-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-sm);
+        }
+
+        .pricing-option-name {
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+
+        .pricing-option-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--color-primary);
+        }
+
+        .pricing-option-description {
+            color: var(--color-text-secondary);
+            font-size: 0.9375rem;
+        }
+
+        /* Scorecard */
+        .scorecard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+
+        .scorecard-item {
+            background: var(--color-bg-secondary);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            text-align: center;
+        }
+
+        .scorecard-label {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .scorecard-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--color-primary);
+        }
+
+        .scorecard-bar {
+            height: 8px;
+            background: var(--color-bg-tertiary);
+            border-radius: var(--radius-full);
+            margin-top: var(--space-sm);
+            overflow: hidden;
+        }
+
+        .scorecard-bar-fill {
+            height: 100%;
+            background: var(--color-primary);
+            border-radius: var(--radius-full);
+            transition: width 0.5s ease;
+        }
+
+        /* Decision Box */
+        .decision-box {
+            padding: var(--space-xl);
+            border-radius: var(--radius-xl);
+            text-align: center;
+            margin-top: var(--space-xl);
+        }
+
+        .decision-box.go {
+            background: linear-gradient(135deg, var(--color-success-bg) 0%, var(--color-secondary-bg) 100%);
+            border: 2px solid var(--color-success);
+        }
+
+        .decision-box.no-go {
+            background: linear-gradient(135deg, var(--color-danger-bg) 0%, #FEE2E2 100%);
+            border: 2px solid var(--color-danger);
+        }
+
+        .decision-box.needs-work {
+            background: linear-gradient(135deg, var(--color-warning-bg) 0%, #FEF3C7 100%);
+            border: 2px solid var(--color-warning);
+        }
+
+        .decision-icon {
+            font-size: 3rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .decision-box.go .decision-icon {
+            color: var(--color-success);
+        }
+
+        .decision-box.no-go .decision-icon {
+            color: var(--color-danger);
+        }
+
+        .decision-box.needs-work .decision-icon {
+            color: var(--color-warning);
+        }
+
+        .decision-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: var(--space-sm);
+        }
+
+        .decision-description {
+            color: var(--color-text-secondary);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* ============================================
+           PRICING SECTION
+           ============================================ */
+        .pricing-section {
+            padding: var(--space-3xl) 0;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--space-xl);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: white;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-2xl);
+            position: relative;
+            transition: var(--transition-base);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-primary);
+            color: white;
+            padding: var(--space-xs) var(--space-lg);
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .pricing-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+            text-align: center;
+        }
+
+        .pricing-description {
+            color: var(--color-text-secondary);
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .pricing-amount {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .pricing-currency {
+            font-size: 1.5rem;
+            font-weight: 600;
+            vertical-align: top;
+        }
+
+        .pricing-value {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .pricing-period {
+            color: var(--color-text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: var(--space-xl);
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) 0;
+            color: var(--color-text-secondary);
+        }
+
+        .pricing-features li i {
+            color: var(--color-success);
+        }
+
+        .pricing-features li.disabled {
+            color: var(--color-text-muted);
+        }
+
+        .pricing-features li.disabled i {
+            color: var(--color-text-muted);
+        }
+
+        .pricing-cta {
+            width: 100%;
+        }
+
+        /* ============================================
+           FAQ SECTION
+           ============================================ */
+        .faq-section {
+            padding: var(--space-3xl) 0;
+            background: var(--color-bg-secondary);
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-md);
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: var(--space-lg);
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--space-md);
+            transition: var(--transition-fast);
+        }
+
+        .faq-question:hover {
+            background: var(--color-bg-secondary);
+        }
+
+        .faq-question i {
+            transition: var(--transition-base);
+        }
+
+        .faq-item.open .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-inner {
+            padding: 0 var(--space-lg) var(--space-lg);
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           FINAL CTA SECTION
+           ============================================ */
+        .final-cta-section {
+            padding: var(--space-3xl) 0;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .final-cta-title {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: var(--space-md);
+        }
+
+        .final-cta-subtitle {
+            font-size: 1.125rem;
+            opacity: 0.9;
+            margin-bottom: var(--space-xl);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .final-cta-features {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-xl);
+            flex-wrap: wrap;
+            margin-bottom: var(--space-xl);
+        }
+
+        .final-cta-feature {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .final-cta-feature i {
+            opacity: 0.9;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            padding: var(--space-xl) 0;
+            background: var(--color-dark);
+            color: white;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-xl);
+            margin-bottom: var(--space-lg);
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-copyright {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.875rem;
+        }
+
+        /* ============================================
+           RESPONSIVE STYLES
+           ============================================ */
+        @media (max-width: 768px) {
+            .hero-stats {
+                gap: var(--space-xl);
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .validator-tabs {
+                gap: var(--space-xs);
+            }
+
+            .validator-tab {
+                padding: var(--space-xs) var(--space-sm);
+                font-size: 0.75rem;
+            }
+
+            .scorecard-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============================================
+           PRINT STYLES
+           ============================================ */
+        @media print {
+            .navbar, .hero, .problem-section, .tools-section, .pricing-section, .faq-section, .final-cta-section, .footer {
+                display: none;
+            }
+
+            .validator-section {
+                padding: 0;
+                background: white;
+            }
+
+            .validator-container {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+
+        /* ============================================
+           MISCELLANEOUS
+           ============================================ */
+        .divider {
+            height: 1px;
+            background: var(--color-border);
+            margin: var(--space-xl) 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-0 { margin-bottom: 0; }
+        .mb-1 { margin-bottom: var(--space-sm); }
+        .mb-2 { margin-bottom: var(--space-md); }
+        .mb-3 { margin-bottom: var(--space-lg); }
+        .mb-4 { margin-bottom: var(--space-xl); }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container navbar-inner">
+            <a href="#" class="navbar-logo">
+                <i class="fas fa-check-double"></i>
+                AppValidator
+            </a>
+            <ul class="navbar-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#validator">Try It Free</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#pricing" class="navbar-cta">Get Started</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-rocket"></i>
+                Trusted by 2,400+ Indie Hackers
+            </div>
+            <h1 class="hero-title">Find Out If Your App Idea Is Worth Building Before You Spend Weeks on It</h1>
+            <p class="hero-subtitle">
+                Stop guessing. Use 8 powerful validation tools to test your idea, understand your market, and make data-driven decisions before writing a single line of code.
+            </p>
+            <div class="hero-actions">
+                <a href="#validator" class="btn btn-primary btn-lg">
+                    <i class="fas fa-play"></i>
+                    Try the Free Tool
+                </a>
+                <a href="#pricing" class="btn btn-secondary btn-lg">
+                    <i class="fas fa-download"></i>
+                    Get the Full Kit
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-value">8</div>
+                    <div class="hero-stat-label">Validation Tools</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">2,400+</div>
+                    <div class="hero-stat-label">Happy Users</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">47%</div>
+                    <div class="hero-stat-label">Time Saved</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">The Problem</span>
+                <h2 class="section-title">You've Been There Before</h2>
+                <p class="section-subtitle">Building apps without validation is like driving with your eyes closed.</p>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="problem-title">Weeks of Development</h3>
+                    <p class="problem-description">You spend months building an app only to discover nobody wants it. All that time, effort, and money—gone.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3 class="problem-title">Wasted Budget</h3>
+                    <p class="problem-description">Hiring developers, designers, and paying for tools before validating your idea is a recipe for financial disaster.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">
+                        <i class="fas fa-user-minus"></i>
+                    </div>
+                    <h3 class="problem-title">Zero Users</h3>
+                    <p class="problem-description">Launch day arrives and the downloads are disappointing. You realize nobody was asking for your solution.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="problem-title">Idea Validation Blues</h3>
+                    <p class="problem-description">You know you should validate, but you don't know where to start. The internet offers conflicting advice.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Validation Tools Section -->
+    <section class="tools-section" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">What's Inside</span>
+                <h2 class="section-title">8 Powerful Validation Tools</h2>
+                <p class="section-subtitle">Everything you need to validate your app idea thoroughly before investing significant resources.</p>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-card-header">
+                        <div class="tool-card-number">1</div>
+                        <h3 class="tool-card-title">Idea Validation Checklist</h3>
+                        <p class="tool-card-description">A comprehensive checklist to evaluate your idea from multiple angles before committing.</p>
+                    </div>
+                    <div class="tool-card-body">
+                        <ul class="tool-card-features">
+                            <li><i class="fas fa-check"></i> 15-point evaluation criteria</li>
+                            <li><i class="fas fa-check"></i> Clear pass/fail indicators</li>
+                            <li><i class="fas fa-check"></i> Actionable improvement tips</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-card-header">
+                        <div class="tool-card-number">2</div>
+                        <h3 class="tool-card-title">Pain Point Scoring Sheet</h3>
+                        <p class="tool-card-description">Quantify how desperately your target users need a solution to their problem.</p>
+                    </div>
+                    <div class="tool-card-body">
+                        <ul class="tool-card-features">
+                            <li><i class="fas fa-check"></i> 10-point severity scale</li>
+                            <li><i class="fas fa-check"></i> Frequency analysis matrix</li>
+                            <li><i class="fas fa-check"></i> Willingness-to-pay indicators</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-card-header">
+                        <div class="tool-card-number">3</div>
+                        <h3 class="tool-card-title">Competitor Scan Worksheet</h3>
+                        <p class="tool-card-description">Analyze existing solutions to find gaps, opportunities, and differentiation angles.</p>
+                    </div>
+                    <div class="tool-card-body">
+                        <ul class="tool-card-features">
+                            <li><i class="fas fa-check"></i> SWOT analysis framework</li>
+                            <li><i class="fas fa-check"></i> Feature comparison matrix</li>
+                            <li><i class="fas fa-check"></i> Pricing strategy insights</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-card-header">
+                        <div class="tool-card-number">4</div>
+                        <h3 class="tool-card-title">Buyer Intent Checklist</h3>
+                        <p class="tool-card-description">Determine if people are actively searching for solutions like yours right now.</p>
+                    </div>
+                    <div class="tool-card-body">
+                        <ul class="tool-card-features">
+                            <li><i class="fas fa-check"></i> Search volume indicators</li>
+                            <li><i class="fas fa-check"></i> Community demand signals</li>
+                            <li><i class="fas fa-check"></i> Purchase behavior patterns</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-card-header">
+                        <div class="tool-card-number">5</div>
+                        <h3 class="tool-card-title">Landing Page Copy Formula</h3>
+                        <p class="tool-card-description">Generate compelling copy that speaks directly to your target audience's pain points.</p>
+                    </div>
+                    <div class="tool-card-body">
+                        <ul class="tool-card-features">
+                            <li><i class="fas fa-check"></i> Headline templates</li>
+                            <li><i class="fas fa-check"></i> Value proposition framework</li>
+                            <li><i class="fas fa-check"></i> CTA optimization tips</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-card-header">
+                        <div class="tool-card-number">6</div>
+                        <h3 class="tool-card-title">MVP Feature Filter</h3>
+                        <p class="tool-card-description">Identify which features are essential for launch and which can wait.</p>
+                    </div>
+                    <div class="tool-card-body">
+                        <ul class="tool-card-features">
+                            <li><i class="fas fa-check"></i> MoSCoW prioritization method</li>
+                            <li><i class="fas fa-check"></i> Effort vs. impact matrix</li>
+                            <li><i class="fas fa-check"></i> Launch-ready checklist</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-card-header">
+                        <div class="tool-card-number">7</div>
+                        <h3 class="tool-card-title">Pricing Test Worksheet</h3>
+                        <p class="tool-card-description">Test different price points and find the sweet spot for your target market.</p>
+                    </div>
+                    <div class="tool-card-body">
+                        <ul class="tool-card-features">
+                            <li><i class="fas fa-check"></i> Price sensitivity analysis</li>
+                            <li><i class="fas fa-check"></i> Competitor pricing comparison</li>
+                            <li><i class="fas fa-check"></i> Value-based pricing calculator</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-card-header">
+                        <div class="tool-card-number">8</div>
+                        <h3 class="tool-card-title">Go/No-Go Decision Scorecard</h3>
+                        <p class="tool-card-description">Get a clear recommendation based on all your validation data combined.</p>
+                    </div>
+                    <div class="tool-card-body">
+                        <ul class="tool-card-features">
+                            <li><i class="fas fa-check"></i> Weighted scoring system</li>
+                            <li><i class="fas fa-check"></i> Clear go/no-go recommendation</li>
+                            <li><i class="fas fa-check"></i> Next steps action plan</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="bonus-bar">
+                <i class="fas fa-gift"></i>
+                <span class="bonus-bar-text"><strong>Bonus:</strong> Lifetime access to all future updates and new validation templates—at no extra cost.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Validator Section -->
+    <section class="validator-section" id="validator">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Interactive Tool</span>
+                <h2 class="section-title">Validate Your App Idea Now</h2>
+                <p class="section-subtitle">Use all 8 validation tools directly in your browser. No signup required.</p>
+            </div>
+            <div class="validator-container">
+                <div class="validator-header">
+                    <div class="validator-tabs">
+                        <button class="validator-tab active" data-tab="idea">1. Idea Checklist</button>
+                        <button class="validator-tab" data-tab="pain">2. Pain Points</button>
+                        <button class="validator-tab" data-tab="competitors">3. Competitors</button>
+                        <button class="validator-tab" data-tab="intent">4. Buyer Intent</button>
+                        <button class="validator-tab" data-tab="copy">5. Landing Copy</button>
+                        <button class="validator-tab" data-tab="mvp">6. MVP Filter</button>
+                        <button class="validator-tab" data-tab="pricing">7. Pricing Test</button>
+                        <button class="validator-tab" data-tab="scorecard">8. Decision</button>
+                    </div>
+                </div>
+                <div class="validator-body">
+                    <!-- Tab 1: Idea Validation Checklist -->
+                    <div class="validator-panel active" id="panel-idea">
+                        <h3 class="panel-title">Idea Validation Checklist</h3>
+                        <p class="panel-description">Evaluate your app idea against these 15 critical success factors.</p>
+                        
+                        <ul class="checklist" id="idea-checklist">
+                            <li class="checklist-item" data-point="1">
+                                <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                                <div class="checklist-content">
+                                    <div class="checklist-title">Does it solve a real problem?</div>
+                                    <div class="checklist-description">Your app must address an actual pain point that users experience regularly.</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" data-point="2">
+                                <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                                <div class="checklist-content">
+                                    <div class="checklist-title">Is the market size sufficient?</div>
+                                    <div class="checklist-description">Ensure enough potential users exist to make your business viable.</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" data-point="3">
+                                <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                                <div class="checklist-content">
+                                    <div class="checklist-title">Can users discover your app?</div>
+                                    <div class="checklist-description">You have a credible plan for reaching your target audience.</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" data-point="4">
+                                <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                                <div class="checklist-content">
+                                    <div class="checklist-title">Can you reach users affordably?</div>
+                                    <div class="checklist-description">Customer acquisition costs should allow for profitable unit economics.</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" data-point="5">
+                                <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                                <div class="checklist-content">
+                                    <div class="checklist-title">Will users pay for this?</div>
+                                    <div class="checklist-description">You have evidence of willingness to pay, not just interest.</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" data-point="6">
+                                <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                                <div class="checklist-content">
+                                    <div class="checklist-title">Is the timing right?</div>
+                                    <div class="checklist-description">Market conditions, technology readiness, and trends support your idea.</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" data-point="7">
+                                <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                                <div class="checklist-content">
+                                    <div class="checklist-title">Do you have a unfair advantage?</div>
+                                    <div class="checklist-description">Unique expertise, relationships, technology, or position gives you edge.</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" data-point="8">
+                                <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                                <div class="checklist-content">
+                                    <div class="checklist-title">Can you build a MVP?</div>
+                                    <div class="checklist-description">You can create a minimum viable product with your available resources.</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" data-point="9">
+                                <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                                <div class="checklist-content">
+                                    <div class="checklist-title">Is the problem recurring?</div>
+                                    <div class="checklist-description">Users face this problem regularly, not just once.</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" data-point="10">
+                                <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                                <div class="checklist-content">
+                                    <div class="checklist-title">Do competitors have users?</div>
+                                    <div class="checklist-description">Existing solutions with customers confirm market demand.</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" data-point="11">
+                                <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                                <div class="checklist-content">
+                                    <div class="checklist-title">Can you differentiate?</div>
+                                    <div class="checklist-description">You have a clear unique selling proposition vs. alternatives.</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" data-point="12">
+                                <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                                <div class="checklist-content">
+                                    <div class="checklist-title">Is the market accessible?</div>
+                                    <div class="checklist-description">You can reach and serve your target customers with your resources.</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" data-point="13">
+                                <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                                <div class="checklist-content">
+                                    <div class="checklist-title">Can you support customers?</div>
+                                    <div class="checklist-description">You can deliver and support your solution at your target price.</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" data-point="14">
+                                <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                                <div class="checklist-content">
+                                    <div class="checklist-title">Do you understand regulations?</div>
+                                    <div class="checklist-description">You know and can comply with relevant legal requirements.</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" data-point="15">
+                                <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                                <div class="checklist-content">
+                                    <div class="checklist-title">Can you scale eventually?</div>
+                                    <div class="checklist-description">The business model can grow beyond your initial capacity.</div>
+                                </div>
+                            </li>
+                        </ul>
+                        
+                        <div class="scorecard-grid" style="margin-top: var(--space-xl);">
+                            <div class="scorecard-item">
+                                <div class="scorecard-label">Your Score</div>
+                                <div class="scorecard-value" id="idea-score">0</div>
+                                <div class="scorecard-bar">
+                                    <div class="scorecard-bar-fill" id="idea-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div class="scorecard-item">
+                                <div class="scorecard-label">Required to Pass</div>
+                                <div class="scorecard-value">12</div>
+                                <div class="scorecard-bar">
+                                    <div class="scorecard-bar-fill" style="width: 80%; background: var(--color-accent);"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab 2: Pain Point Scoring -->
+                    <div class="validator-panel" id="panel-pain">
+                        <h3 class="panel-title">Pain Point Scoring Sheet</h3>
+                        <p class="panel-description">Rate your target users' pain point on a scale of 1-10 for each dimension.</p>
+                        
+                        <div class="form-group">
+                            <label class="form-label">1. How severe is the pain? (1-10)</label>
+                            <div class="score-input-group">
+                                <input type="range" min="1" max="10" value="5" class="score-slider" id="pain-severity">
+                                <div class="score-value" id="pain-severity-value">5</div>
+                            </div>
+                            <div class="score-labels">
+                                <span>Mild inconvenience</span>
+                                <span>Critical problem</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">2. How often do they experience it? (1-10)</label>
+                            <div class="score-input-group">
+                                <input type="range" min="1" max="10" value="5" class="score-slider" id="pain-frequency">
+                                <div class="score-value" id="pain-frequency-value">5</div>
+                            </div>
+                            <div class="score-labels">
+                                <span>Rarely</span>
+                                <span>Multiple times daily</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">3. How urgently do they need a fix? (1-10)</label>
+                            <div class="score-input-group">
+                                <input type="range" min="1" max="10" value="5" class="score-slider" id="pain-urgency">
+                                <div class="score-value" id="pain-urgency-value">5</div>
+                            </div>
+                            <div class="score-labels">
+                                <span>Can wait indefinitely</span>
+                                <span>Need solution NOW</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">4. Current solutions satisfaction? (1-10, inverted)</label>
+                            <div class="score-input-group">
+                                <input type="range" min="1" max="10" value="5" class="score-slider" id="pain-satisfaction">
+                                <div class="score-value" id="pain-satisfaction-value">5</div>
+                            </div>
+                            <div class="score-labels">
+                                <span>Very satisfied</span>
+                                <span>Completely frustrated</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">5. Financial impact of the problem? (1-10)</label>
+                            <div class="score-input-group">
+                                <input type="range" min="1" max="10" value="5" class="score-slider" id="pain-financial">
+                                <div class="score-value" id="pain-financial-value">5</div>
+                            </div>
+                            <div class="score-labels">
+                                <span>No financial impact</span>
+                                <span>Significant losses</span>
+                            </div>
+                        </div>
+
+                        <div class="scorecard-grid">
+                            <div class="scorecard-item">
+                                <div class="scorecard-label">Average Pain Score</div>
+                                <div class="scorecard-value" id="pain-total">25</div>
+                                <div class="scorecard-bar">
+                                    <div class="scorecard-bar-fill" id="pain-bar" style="width: 50%"></div>
+                                </div>
+                            </div>
+                            <div class="scorecard-item">
+                                <div class="scorecard-label">Minimum to Succeed</div>
+                                <div class="scorecard-value">35</div>
+                                <div class="scorecard-bar">
+                                    <div class="scorecard-bar-fill" style="width: 70%; background: var(--color-accent);"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Additional notes about your target users' pain:</label>
+                            <textarea class="form-input" id="pain-notes" placeholder="Document your research findings, user interviews, or survey results here..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Tab 3: Competitor Scan -->
+                    <div class="validator-panel" id="panel-competitors">
+                        <h3 class="panel-title">Competitor Scan Worksheet</h3>
+                        <p class="panel-description">Analyze your top 3 competitors to find gaps and opportunities.</p>
+                        
+                        <div class="competitor-grid" id="competitor-list">
+                            <div class="competitor-card" data-competitor="1">
+                                <div class="competitor-card-header">
+                                    <input type="text" class="competitor-name-input" placeholder="Competitor Name" value="Competitor A">
+                                    <button class="remove-competitor" title="Remove competitor"><i class="fas fa-trash"></i></button>
+                                </div>
+                                <div class="competitor-strengths">
+                                    <span class="strength-tag"><i class="fas fa-check"></i> Strong brand</span>
+                                    <span class="strength-tag"><i class="fas fa-check"></i> Large user base</span>
+                                    <span class="strength-tag"><i class="fas fa-times"></i> Poor UX</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Weaknesses (what they do poorly)</label>
+                                    <textarea class="form-input" placeholder="What does this competitor do poorly?"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Pricing</label>
+                                    <input type="text" class="form-input" placeholder="e.g., $29/month">
+                                </div>
+                            </div>
+                            <div class="competitor-card" data-competitor="2">
+                                <div class="competitor-card-header">
+                                    <input type="text" class="competitor-name-input" placeholder="Competitor Name" value="Competitor B">
+                                    <button class="remove-competitor" title="Remove competitor"><i class="fas fa-trash"></i></button>
+                                </div>
+                                <div class="competitor-strengths">
+                                    <span class="strength-tag"><i class="fas fa-check"></i> Low price</span>
+                                    <span class="strength-tag"><i class="fas fa-times"></i> Limited features</span>
+                                    <span class="strength-tag"><i class="fas fa-times"></i> Bad support</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Weaknesses (what they do poorly)</label>
+                                    <textarea class="form-input" placeholder="What does this competitor do poorly?"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Pricing</label>
+                                    <input type="text" class="form-input" placeholder="e.g., $9/month">
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="add-competitor-btn" id="add-competitor">
+                            <i class="fas fa-plus"></i> Add Another Competitor
+                        </button>
+
+                        <div class="divider"></div>
+
+                        <div class="form-group">
+                            <label class="form-label">Your Differentiation Strategy</label>
+                            <textarea class="form-input" id="differentiation" placeholder="How will your app be different and better than existing solutions?"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Underserved Market Gap</label>
+                            <textarea class="form-input" id="market-gap" placeholder="What need are current competitors failing to meet?"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Tab 4: Buyer Intent -->
+                    <div class="validator-panel" id="panel-intent">
+                        <h3 class="panel-title">Buyer Intent Checklist</h3>
+                        <p class="panel-description">Verify that people are actively searching for solutions like yours.</p>
+                        
+                        <ul class="checklist" id="intent-checklist">
+                            <li class="checklist-item" data-point="1">
+                                <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                                <div class="checklist-content">
+                                    <div class="checklist-title">Search volume exists</div>
+                                    <div class="checklist-description">People are searching for terms related to your solution (use Google Keyword Planner, Ubersuggest, or similar tools).</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" data-point="2">
+                                <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                                <div class="checklist-content">
+                                    <div class="checklist-title">Communities discuss this problem</div>
+                                    <div class="checklist-description">Reddit, Facebook groups, forums, or Slack communities have active discussions about this pain point.</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" data-point="3">
+                                <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                                <div class="checklist-content">
+                                    <div class="checklist-title">People are buying alternatives</div>
+                                    <div class="checklist-description">Existing solutions have paying customers, reviews, and testimonials.</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" data-point="4">
+                                <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                                <div class="checklist-content">
+                                    <div class="checklist-title">You can reach the audience</div>
+                                    <div class="checklist-description">Your target users gather in accessible places (online or offline) where you can find them.</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" data-point="5">
+                                <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                                <div class="checklist-content">
+                                    <div class="checklist-title">Direct feedback confirms demand</div>
+                                    <div class="checklist-description">You've talked to potential users who expressed interest or intent to purchase.</div>
+                                </div>
+                            </li>
+                            <li class="checklist-item" data-point="6">
+                                <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                                <div class="checklist-content">
+                                    <div class="checklist-title">Social proof indicators present</div>
+                                    <div class="checklist-description">LinkedIn posts, tweets, or blog articles about this problem exist and get engagement.</div>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="scorecard-grid" style="margin-top: var(--space-xl);">
+                            <div class="scorecard-item">
+                                <div class="scorecard-label">Intent Score</div>
+                                <div class="scorecard-value" id="intent-score">0</div>
+                                <div class="scorecard-bar">
+                                    <div class="scorecard-bar-fill" id="intent-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div class="scorecard-item">
+                                <div class="scorecard-label">Required to Pass</div>
+                                <div class="scorecard-value">5</div>
+                                <div class="scorecard-bar">
+                                    <div class="scorecard-bar-fill" style="width: 83%; background: var(--color-accent);"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top: var(--space-xl);">
+                            <label class="form-label">Document your research:</label>
+                            <textarea class="form-input" id="intent-notes" placeholder="Note specific search terms, community names, competitors' customer counts, or quotes from potential users..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Tab 5: Landing Page Copy -->
+                    <div class="validator-panel" id="panel-copy">
+                        <h3 class="panel-title">Landing Page Copy Formula</h3>
+                        <p class="panel-description">Generate compelling copy for your landing page based on your validated idea.</p>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Your App Name</label>
+                            <input type="text" class="form-input" id="app-name" placeholder="e.g., TaskMaster">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Primary Benefit (one sentence)</label>
+                            <input type="text" class="form-input" id="app-benefit" placeholder="e.g., Save 2 hours every day">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Target User Description</label>
+                            <input type="text" class="form-input" id="app-user" placeholder="e.g., Busy professionals who need to manage multiple projects">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Main Problem You Solve</label>
+                            <input type="text" class="form-input" id="app-problem" placeholder="e.g., Juggling scattered tasks across different tools">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Your Unique Approach</label>
+                            <input type="text" class="form-input" id="app-unique" placeholder="e.g., All-in-one dashboard with AI prioritization">
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <div class="copy-section">
+                            <h4 class="copy-section-title"><i class="fas fa-heading"></i> Generated Headline</h4>
+                            <div class="generated-copy">
+                                <div class="generated-copy-label">Use this as your hero headline:</div>
+                                <p class="generated-copy-text" id="generated-headline">[Enter your app details above to generate headline]</p>
+                            </div>
+                        </div>
+
+                        <div class="copy-section">
+                            <h4 class="copy-section-title"><i class="fas fa-bolt"></i> Generated Subheadline</h4>
+                            <div class="generated-copy">
+                                <div class="generated-copy-label">Use this as your subheadline:</div>
+                                <p class="generated-copy-text" id="generated-subheadline">[Enter your app details above to generate subheadline]</p>
+                            </div>
+                        </div>
+
+                        <div class="copy-section">
+                            <h4 class="copy-section-title"><i class="fas fa-bullseye"></i> Generated CTA</h4>
+                            <div class="generated-copy">
+                                <div class="generated-copy-label">Use this for your main call-to-action:</div>
+                                <p class="generated-copy-text" id="generated-cta">[Enter your app details above to generate CTA]</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab 6: MVP Feature Filter -->
+                    <div class="validator-panel" id="panel-mvp">
+                        <h3 class="panel-title">MVP Feature Filter</h3>
+                        <p class="panel-description">Prioritize features using the MoSCoW method to define your MVP scope.</p>
+                        
+                        <p class="mb-3">Add your potential features and categorize them:</p>
+
+                        <div class="form-group">
+                            <label class="form-label">Add a Feature</label>
+                            <div style="display: flex; gap: var(--space-sm);">
+                                <input type="text" class="form-input" id="new-feature" placeholder="Feature name...">
+                                <select class="form-input" id="feature-priority" style="width: 140px;">
+                                    <option value="must">Must Have</option>
+                                    <option value="should">Should Have</option>
+                                    <option value="could">Could Have</option>
+                                    <option value="wont">Won't Have (Yet)</option>
+                                </select>
+                                <button class="btn btn-primary" id="add-feature">Add</button>
+                            </div>
+                        </div>
+
+                        <div class="scorecard-grid" style="margin-top: var(--space-xl);">
+                            <div class="scorecard-item" style="border-left: 4px solid var(--color-danger);">
+                                <div class="scorecard-label">Must Have</div>
+                                <div class="scorecard-value" id="mvp-must-count">0</div>
+                            </div>
+                            <div class="scorecard-item" style="border-left: 4px solid var(--color-accent);">
+                                <div class="scorecard-label">Should Have</div>
+                                <div class="scorecard-value" id="mvp-should-count">0</div>
+                            </div>
+                            <div class="scorecard-item" style="border-left: 4px solid var(--color-success);">
+                                <div class="scorecard-label">Could Have</div>
+                                <div class="scorecard-value" id="mvp-could-count">0</div>
+                            </div>
+                            <div class="scorecard-item" style="border-left: 4px solid var(--color-text-muted);">
+                                <div class="scorecard-label">Won't Have</div>
+                                <div class="scorecard-value" id="mvp-wont-count">0</div>
+                            </div>
+                        </div>
+
+                        <div id="feature-list" style="margin-top: var(--space-xl);">
+                            <div class="checklist-item" data-feature="1" data-category="must">
+                                <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                                <div class="checklist-content">
+                                    <div class="checklist-title">User Authentication</div>
+                                    <div class="checklist-description">Users can sign up and log in securely</div>
+                                </div>
+                            </div>
+                            <div class="checklist-item" data-feature="2" data-category="must">
+                                <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                                <div class="checklist-content">
+                                    <div class="checklist-title">Core Function</div>
+                                    <div class="checklist-description">The main feature that solves the core problem</div>
+                                </div>
+                            </div>
+                            <div class="checklist-item" data-feature="3" data-category="should">
+                                <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                                <div class="checklist-content">
+                                    <div class="checklist-title">Email Notifications</div>
+                                    <div class="checklist-description">Alert users about important updates</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="decision-box needs-work" style="margin-top: var(--space-xl);">
+                            <div class="decision-icon"><i class="fas fa-lightbulb"></i></div>
+                            <h4 class="decision-title">MVP Recommendation</h4>
+                            <p class="decision-description" id="mvp-recommendation">Your MVP should include all "Must Have" features. Start with a maximum of 3-5 core features to launch quickly and validate.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tab 7: Pricing Test -->
+                    <div class="validator-panel" id="panel-pricing">
+                        <h3 class="panel-title">Pricing Test Worksheet</h3>
+                        <p class="panel-description">Evaluate different pricing models and find your optimal price point.</p>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Select your pricing model:</label>
+                            <div class="pricing-option selected" data-model="subscription">
+                                <div class="pricing-option-header">
+                                    <span class="pricing-option-name">Subscription (Monthly/Yearly)</span>
+                                    <span class="pricing-option-price">$X/mo</span>
+                                </div>
+                                <p class="pricing-option-description">Predictable recurring revenue. Best for ongoing value delivery.</p>
+                            </div>
+                            <div class="pricing-option" data-model="one-time">
+                                <div class="pricing-option-header">
+                                    <span class="pricing-option-name">One-Time Purchase</span>
+                                    <span class="pricing-option-price">$X</span>
+                                </div>
+                                <p class="pricing-option-description">Pay once, own forever. Lower barrier to entry.</p>
+                            </div>
+                            <div class="pricing-option" data-model="freemium">
+                                <div class="pricing-option-header">
+                                    <span class="pricing-option-name">Freemium</span>
+                                    <span class="pricing-option-price">Free + $X</span>
+                                </div>
+                                <p class="pricing-option-description">Free tier with premium upgrades. Maximum user acquisition.</p>
+                            </div>
+                            <div class="pricing-option" data-model="usage">
+                                <div class="pricing-option-header">
+                                    <span class="pricing-option-name">Usage-Based</span>
+                                    <span class="pricing-option-price">$X/unit</span>
+                                </div>
+                                <p class="pricing-option-description">Pay for what you use. Fair but unpredictable revenue.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Your Target Price Point</label>
+                            <div class="score-input-group">
+                                <input type="range" min="5" max="500" value="29" class="score-slider" id="pricing-value">
+                                <div class="score-value" id="pricing-value-display">$29</div>
+                            </div>
+                            <div class="score-labels">
+                                <span>$5</span>
+                                <span>$500</span>
+                            </div>
+                        </div>
+
+                        <div class="scorecard-grid">
+                            <div class="scorecard-item">
+                                <div class="scorecard-label">Competitor Avg. Price</div>
+                                <div class="scorecard-value" id="competitor-avg">$24</div>
+                            </div>
+                            <div class="scorecard-item">
+                                <div class="scorecard-label">Your Price</div>
+                                <div class="scorecard-value" id="your-price">$29</div>
+                            </div>
+                            <div class="scorecard-item">
+                                <div class="scorecard-label">Premium/Discount</div>
+                                <div class="scorecard-value" id="price-difference" style="color: var(--color-success);">+21%</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top: var(--space-xl);">
+                            <label class="form-label">Justify your pricing premium:</label>
+                            <textarea class="form-input" id="pricing-justification" placeholder="What extra value do customers get that justifies your price vs. competitors?"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Target customer lifetime value:</label>
+                            <input type="text" class="form-input" id="ltv" placeholder="e.g., $500 (avg customer stays 17 months)">
+                        </div>
+                    </div>
+
+                    <!-- Tab 8: Decision Scorecard -->
+                    <div class="validator-panel" id="panel-scorecard">
+                        <h3 class="panel-title">Go/No-Go Decision Scorecard</h3>
+                        <p class="panel-description">See your overall validation results and get a clear recommendation.</p>
+                        
+                        <div class="scorecard-grid">
+                            <div class="scorecard-item">
+                                <div class="scorecard-label">Idea Validation</div>
+                                <div class="scorecard-value" id="final-idea">0/15</div>
+                                <div class="scorecard-bar">
+                                    <div class="scorecard-bar-fill" id="final-idea-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div class="scorecard-item">
+                                <div class="scorecard-label">Pain Points</div>
+                                <div class="scorecard-value" id="final-pain">0/50</div>
+                                <div class="scorecard-bar">
+                                    <div class="scorecard-bar-fill" id="final-pain-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div class="scorecard-item">
+                                <div class="scorecard-label">Buyer Intent</div>
+                                <div class="scorecard-value" id="final-intent">0/6</div>
+                                <div class="scorecard-bar">
+                                    <div class="scorecard-bar-fill" id="final-intent-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div class="scorecard-item">
+                                <div class="scorecard-label">Overall Score</div>
+                                <div class="scorecard-value" id="final-total">0%</div>
+                                <div class="scorecard-bar">
+                                    <div class="scorecard-bar-fill" id="final-total-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="decision-box needs-work" id="decision-box">
+                            <div class="decision-icon"><i class="fas fa-clipboard-list"></i></div>
+                            <h4 class="decision-title" id="decision-title">Complete All Sections</h4>
+                            <p class="decision-description" id="decision-description">Fill out all 7 validation sections above to get your personalized recommendation.</p>
+                        </div>
+
+                        <div style="margin-top: var(--space-xl);">
+                            <h4 class="mb-2">Your Next Steps</h4>
+                            <ul style="list-style: none;">
+                                <li style="padding: var(--space-sm) 0; border-bottom: 1px solid var(--color-border);">
+                                    <i class="fas fa-arrow-right" style="color: var(--color-primary); margin-right: var(--space-sm);"></i>
+                                    <strong>Export your results</strong> — Save or print this validation report for your records.
+                                </li>
+                                <li style="padding: var(--space-sm) 0; border-bottom: 1px solid var(--color-border);">
+                                    <i class="fas fa-arrow-right" style="color: var(--color-primary); margin-right: var(--space-sm);"></i>
+                                    <strong>Share with advisors</strong> — Get feedback from mentors or co-founders.
+                                </li>
+                                <li style="padding: var(--space-sm) 0; border-bottom: 1px solid var(--color-border);">
+                                    <i class="fas fa-arrow-right" style="color: var(--color-primary); margin-right: var(--space-sm);"></i>
+                                    <strong>Start small</strong> — Build a landing page to test interest before full development.
+                                </li>
+                                <li style="padding: var(--space-sm) 0;">
+                                    <i class="fas fa-arrow-right" style="color: var(--color-primary); margin-right: var(--space-sm);"></i>
+                                    <strong>Join our community</strong> — Connect with other validators for support and insights.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div style="text-align: center; margin-top: var(--space-xl);">
+                            <button class="btn btn-secondary" onclick="window.print()">
+                                <i class="fas fa-print"></i> Print/Save as PDF
+                            </button>
+                            <button class="btn btn-primary" id="save-progress">
+                                <i class="fas fa-save"></i> Save Progress
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Pricing</span>
+                <h2 class="section-title">Get the Full Validation Kit</h2>
+                <p class="section-subtitle">Choose the package that fits your needs. Both include lifetime access.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3 class="pricing-name">Starter</h3>
+                    <p class="pricing-description">Perfect for individual validators testing their first idea.</p>
+                    <div class="pricing-amount">
+                        <span class="pricing-currency">$</span>
+                        <span class="pricing-value">19</span>
+                        <span class="pricing-period">one-time</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Interactive Validation Sheet (all 8 tools)</li>
+                        <li><i class="fas fa-check"></i> PDF Download of results</li>
+                        <li><i class="fas fa-check"></i> Printable worksheets</li>
+                        <li><i class="fas fa-check"></i> Email support</li>
+                        <li class="disabled"><i class="fas fa-times"></i> PRD Templates</li>
+                        <li class="disabled"><i class="fas fa-times"></i> AI Prompts</li>
+                        <li class="disabled"><i class="fas fa-times"></i> Expert review credits</li>
+                    </ul>
+                    <button class="btn btn-secondary pricing-cta">
+                        <i class="fas fa-shopping-cart"></i> Buy Now
+                    </button>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Most Popular</div>
+                    <h3 class="pricing-name">Premium</h3>
+                    <p class="pricing-description">Complete toolkit for serious founders and teams.</p>
+                    <div class="pricing-amount">
+                        <span class="pricing-currency">$</span>
+                        <span class="pricing-value">79</span>
+                        <span class="pricing-period">one-time</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Interactive Validation Sheet (all 8 tools)</li>
+                        <li><i class="fas fa-check"></i> PDF Download of results</li>
+                        <li><i class="fas fa-check"></i> Printable worksheets</li>
+                        <li><i class="fas fa-check"></i> Priority email support</li>
+                        <li><i class="fas fa-check"></i> <strong>PRD Templates</strong> (5 templates)</li>
+                        <li><i class="fas fa-check"></i> <strong>AI Prompts</strong> (20+ prompts)</li>
+                        <li><i class="fas fa-check"></i> <strong>1-hour expert review call</strong></li>
+                    </ul>
+                    <button class="btn btn-primary pricing-cta">
+                        <i class="fas fa-shopping-cart"></i> Buy Now
+                    </button>
+                </div>
+            </div>
+            <p class="text-center mb-0" style="margin-top: var(--space-xl); color: var(--color-text-secondary);">
+                <i class="fas fa-lock"></i> Secure payment via Stripe. Instant digital delivery. 30-day money-back guarantee.
+            </p>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">FAQ</span>
+                <h2 class="section-title">Questions? We've Got Answers.</h2>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        How is this different from free templates online?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Our validation sheet is an interactive web app—not a static PDF. It calculates scores automatically, generates copy, and provides personalized recommendations. Plus, you get the premium templates and AI prompts that would cost much more from consultants.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Do I need to sign up or create an account?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Nope! The interactive validator works entirely in your browser with no account required. Your progress is saved locally in your browser. Only if you purchase the premium version will you need to provide an email for delivery.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What are the PRD templates?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            PRD (Product Requirements Document) templates are structured frameworks for defining your app's features, requirements, and specifications. We include 5 different templates ranging from simple one-page PRDs to comprehensive technical specs—ready to customize for your specific app.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        How do the AI prompts work?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Our AI prompts are carefully crafted instructions you can use with ChatGPT, Claude, or other AI assistants to generate landing page copy, user interview questions, feature descriptions, and more. Simply copy, paste, and customize for your specific needs—no AI subscription required beyond what you already have.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What's included in the expert review?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Premium buyers get a 1-hour video call with one of our validation experts. They'll review your completed validation results, provide personalized feedback, answer your specific questions, and help you develop an action plan. Scheduling is flexible and available worldwide.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Is this a subscription or one-time payment?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Both! It's a one-time payment for lifetime access. You'll receive all future updates to the validation tools and templates at no additional cost. We believe in building value, not creating recurring revenue from the same product.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What if I'm not satisfied?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            We offer a 30-day money-back guarantee, no questions asked. If the validation sheet doesn't meet your needs, email us within 30 days of purchase for a full refund.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="final-cta-section">
+        <div class="container">
+            <h2 class="final-cta-title">Stop Guessing. Start Validating.</h2>
+            <p class="final-cta-subtitle">
+                Join thousands of indie hackers who built apps people actually wanted—by validating first.
+            </p>
+            <div class="final-cta-features">
+                <div class="final-cta-feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Instant access</span>
+                </div>
+                <div class="final-cta-feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Lifetime updates</span>
+                </div>
+                <div class="final-cta-feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span>30-day guarantee</span>
+                </div>
+            </div>
+            <a href="#pricing" class="btn btn-lg" style="background: white; color: var(--color-primary);">
+                <i class="fas fa-rocket"></i>
+                Get Started for $19
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#faq">FAQ</a>
+                <a href="#validator">Validator</a>
+            </div>
+            <p class="footer-copyright">
+                © 2025 AppValidator. All rights reserved. Built for indie hackers and founders.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // ============================================
+        // NAVIGATION
+        // ============================================
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ============================================
+        // FAQ ACCORDION
+        // ============================================
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                const isOpen = item.classList.contains('open');
+                
+                // Close all other items
+                document.querySelectorAll('.faq-item').forEach(faq => {
+                    faq.classList.remove('open');
+                });
+                
+                // Toggle current item
+                if (!isOpen) {
+                    item.classList.add('open');
+                }
+            });
+        });
+
+        // ============================================
+        // VALIDATOR TABS
+        // ============================================
+        const validatorTabs = document.querySelectorAll('.validator-tab');
+        const validatorPanels = document.querySelectorAll('.validator-panel');
+
+        validatorTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.dataset.tab;
+                
+                // Update tabs
+                validatorTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Update panels
+                validatorPanels.forEach(panel => {
+                    panel.classList.remove('active');
+                    if (panel.id === `panel-${tabId}`) {
+                        panel.classList.add('active');
+                    }
+                });
+
+                // Update scorecard when switching to final tab
+                if (tabId === 'scorecard') {
+                    updateScorecard();
+                }
+            });
+        });
+
+        // ============================================
+        // IDEA CHECKLIST
+        // ============================================
+        const ideaChecklist = document.getElementById('idea-checklist');
+        let ideaChecked = new Set();
+
+        ideaChecklist.querySelectorAll('.checklist-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const point = item.dataset.point;
+                item.classList.toggle('checked');
+                
+                if (item.classList.contains('checked')) {
+                    ideaChecked.add(point);
+                } else {
+                    ideaChecked.delete(point);
+                }
+                
+                updateIdeaScore();
+            });
+        });
+
+        function updateIdeaScore() {
+            const score = ideaChecked.size;
+            const maxScore = 15;
+            const percentage = (score / maxScore) * 100;
+            
+            document.getElementById('idea-score').textContent = score;
+            document.getElementById('idea-bar').style.width = `${percentage}%`;
+        }
+
+        // ============================================
+        // PAIN POINT SLIDERS
+        // ============================================
+        const painSliders = ['severity', 'frequency', 'urgency', 'satisfaction', 'financial'];
+        
+        painSliders.forEach(type => {
+            const slider = document.getElementById(`pain-${type}`);
+            const display = document.getElementById(`pain-${type}-value`);
+            
+            slider.addEventListener('input', () => {
+                display.textContent = slider.value;
+                updatePainScore();
+            });
+        });
+
+        function updatePainScore() {
+            let total = 0;
+            painSliders.forEach(type => {
+                total += parseInt(document.getElementById(`pain-${type}`).value);
+            });
+            
+            const maxScore = 50;
+            const percentage = (total / maxScore) * 100;
+            
+            document.getElementById('pain-total').textContent = total;
+            document.getElementById('pain-bar').style.width = `${percentage}%`;
+        }
+
+        // ============================================
+        // COMPETITOR MANAGEMENT
+        // ============================================
+        const competitorList = document.getElementById('competitor-list');
+        let competitorCount = 2;
+
+        document.getElementById('add-competitor').addEventListener('click', () => {
+            competitorCount++;
+            const competitorCard = document.createElement('div');
+            competitorCard.className = 'competitor-card';
+            competitorCard.dataset.competitor = competitorCount;
+            competitorCard.innerHTML = `
+                <div class="competitor-card-header">
+                    <input type="text" class="competitor-name-input" placeholder="Competitor Name">
+                    <button class="remove-competitor" title="Remove competitor"><i class="fas fa-trash"></i></button>
+                </div>
+                <div class="competitor-strengths">
+                    <span class="strength-tag"><i class="fas fa-plus"></i> Add strength</span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Weaknesses (what they do poorly)</label>
+                    <textarea class="form-input" placeholder="What does this competitor do poorly?"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Pricing</label>
+                    <input type="text" class="form-input" placeholder="e.g., $29/month">
+                </div>
+            `;
+            
+            competitorList.appendChild(competitorCard);
+            
+            // Add remove functionality
+            competitorCard.querySelector('.remove-competitor').addEventListener('click', () => {
+                if (competitorCount > 1) {
+                    competitorCard.remove();
+                    competitorCount--;
+                }
+            });
+        });
+
+        // ============================================
+        // INTENT CHECKLIST
+        // ============================================
+        const intentChecklist = document.getElementById('intent-checklist');
+        let intentChecked = new Set();
+
+        intentChecklist.querySelectorAll('.checklist-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const point = item.dataset.point;
+                item.classList.toggle('checked');
+                
+                if (item.classList.contains('checked')) {
+                    intentChecked.add(point);
+                } else {
+                    intentChecked.delete(point);
+                }
+                
+                updateIntentScore();
+            });
+        });
+
+        function updateIntentScore() {
+            const score = intentChecked.size;
+            const maxScore = 6;
+            const percentage = (score / maxScore) * 100;
+            
+            document.getElementById('intent-score').textContent = score;
+            document.getElementById('intent-bar').style.width = `${percentage}%`;
+        }
+
+        // ============================================
+        // LANDING PAGE COPY GENERATOR
+        // ============================================
+        const copyInputs = ['app-name', 'app-benefit', 'app-user', 'app-problem', 'app-unique'];
+        
+        copyInputs.forEach(inputId => {
+            document.getElementById(inputId).addEventListener('input', generateCopy);
+        });
+
+        function generateCopy() {
+            const appName = document.getElementById('app-name').value || 'Your App';
+            const benefit = document.getElementById('app-benefit').value || '[your main benefit]';
+            const user = document.getElementById('app-user').value || '[your target user]';
+            const problem = document.getElementById('app-problem').value || '[the problem you solve]';
+            const unique = document.getElementById('app-unique').value || '[your unique approach]';
+            
+            // Generate headline
+            const headlines = [
+                `${appName}: ${benefit}`,
+                `The Last ${appName} You'll Ever Need`,
+                `How ${user.split(' ')[0]}s Save 2 Hours Daily with ${appName}`,
+                `${appName} — Built for ${user.split(' ')[0]}s Who ${benefit}`
+            ];
+            
+            document.getElementById('generated-headline').textContent = headlines[Math.floor(Math.random() * headlines.length)];
+            
+            // Generate subheadline
+            document.getElementById('generated-subheadline').textContent = 
+                `Stop struggling with ${problem.toLowerCase()}. ${appName} uses ${unique.toLowerCase()} to help ${user.toLowerCase()} achieve better results, faster.`;
+            
+            // Generate CTA
+            document.getElementById('generated-cta').textContent = 
+                `Start Your Free Trial of ${appName} →`;
+        }
+
+        // ============================================
+        // MVP FEATURE FILTER
+        // ============================================
+        const featureList = document.getElementById('feature-list');
+        let featureCount = 3;
+
+        document.getElementById('add-feature').addEventListener('click', () => {
+            const newFeature = document.getElementById('new-feature').value.trim();
+            const priority = document.getElementById('feature-priority').value;
+            
+            if (!newFeature) return;
+            
+            featureCount++;
+            const featureItem = document.createElement('div');
+            featureItem.className = 'checklist-item';
+            featureItem.dataset.feature = featureCount;
+            featureItem.dataset.category = priority;
+            featureItem.innerHTML = `
+                <div class="checklist-checkbox"><i class="fas fa-check"></i></div>
+                <div class="checklist-content">
+                    <div class="checklist-title">${newFeature}</div>
+                    <div class="checklist-description">${priority === 'must' ? 'Must Have' : priority === 'should' ? 'Should Have' : priority === 'could' ? 'Could Have' : "Won't Have (Yet)"}</div>
+                </div>
+            `;
+            
+            featureItem.addEventListener('click', () => {
+                featureItem.classList.toggle('checked');
+                updateFeatureCounts();
+            });
+            
+            featureList.appendChild(featureItem);
+            document.getElementById('new-feature').value = '';
+            updateFeatureCounts();
+        });
+
+        function updateFeatureCounts() {
+            const features = featureList.querySelectorAll('.checklist-item');
+            const counts = { must: 0, should: 0, could: 0, wont: 0 };
+            
+            features.forEach(f => {
+                const category = f.dataset.category;
+                counts[category]++;
+            });
+            
+            document.getElementById('mvp-must-count').textContent = counts.must;
+            document.getElementById('mvp-should-count').textContent = counts.should;
+            document.getElementById('mvp-could-count').textContent = counts.could;
+            document.getElementById('mvp-wont-count').textContent = counts.wont;
+        }
+
+        // ============================================
+        // PRICING TEST
+        // ============================================
+        const pricingOptions = document.querySelectorAll('.pricing-option');
+        
+        pricingOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                pricingOptions.forEach(o => o.classList.remove('selected'));
+                option.classList.add('selected');
+            });
+        });
+
+        const pricingSlider = document.getElementById('pricing-value');
+        const pricingDisplay = document.getElementById('pricing-value-display');
+        
+        pricingSlider.addEventListener('input', () => {
+            const value = pricingSlider.value;
+            pricingDisplay.textContent = `$${value}`;
+            document.getElementById('your-price').textContent = `$${value}`;
+            
+            const competitorAvg = 24;
+            const diff = ((value - competitorAvg) / competitorAvg * 100).toFixed(0);
+            const diffEl = document.getElementById('price-difference');
+            diffEl.textContent = `${diff > 0 ? '+' : ''}${diff}%`;
+            diffEl.style.color = diff > 0 ? 'var(--color-danger)' : 'var(--color-success)';
+        });
+
+        // ============================================
+        // FINAL SCORECARD
+        // ============================================
+        function updateScorecard() {
+            // Idea score
+            const ideaScore = ideaChecked.size;
+            document.getElementById('final-idea').textContent = `${ideaScore}/15`;
+            document.getElementById('final-idea-bar').style.width = `${(ideaScore/15)*100}%`;
+            
+            // Pain score
+            let painTotal = 0;
+            painSliders.forEach(type => {
+                painTotal += parseInt(document.getElementById(`pain-${type}`).value);
+            });
+            document.getElementById('final-pain').textContent = `${painTotal}/50`;
+            document.getElementById('final-pain-bar').style.width = `${(painTotal/50)*100}%`;
+            
+            // Intent score
+            const intentScore = intentChecked.size;
+            document.getElementById('final-intent').textContent = `${intentScore}/6`;
+            document.getElementById('final-intent-bar').style.width = `${(intentScore/6)*100}%`;
+            
+            // Total score
+            const totalScore = Math.round(((ideaScore/15) + (painTotal/50) + (intentScore/6)) / 3 * 100);
+            document.getElementById('final-total').textContent = `${totalScore}%`;
+            document.getElementById('final-total-bar').style.width = `${totalScore}%`;
+            
+            // Decision
+            const decisionBox = document.getElementById('decision-box');
+            const decisionTitle = document.getElementById('decision-title');
+            const decisionDescription = document.getElementById('decision-description');
+            
+            decisionBox.classList.remove('go', 'no-go', 'needs-work');
+            
+            if (totalScore >= 70 && ideaScore >= 12 && painTotal >= 35 && intentScore >= 5) {
+                decisionBox.classList.add('go');
+                decisionTitle.textContent = 'GO! Your Idea Has Strong Potential';
+                decisionDescription.textContent = 'Your validation results look great! You have a solid foundation to move forward with building your MVP. Consider creating a landing page to test interest before full development.';
+            } else if (totalScore >= 50) {
+                decisionBox.classList.add('needs-work');
+                decisionTitle.textContent = 'NEEDS WORK — Address Key Gaps';
+                decisionDescription.textContent = 'Your idea has potential, but you need to strengthen a few areas before committing to development. Focus on the sections with lower scores to improve your chances of success.';
+            } else {
+                decisionBox.classList.add('no-go');
+                decisionTitle.textContent = 'NO-GO — Rethink Your Approach';
+                decisionDescription.textContent = 'Your validation results indicate significant challenges. Before giving up, consider pivoting to address the weak areas. Many successful products started with failed validations that led to better ideas.';
+            }
+        }
+
+        // ============================================
+        // SAVE PROGRESS
+        // ============================================
+        document.getElementById('save-progress').addEventListener('click', () => {
+            const data = {
+                ideaChecked: Array.from(ideaChecked),
+                painScores: {},
+                intentChecked: Array.from(intentChecked),
+                appName: document.getElementById('app-name').value,
+                appBenefit: document.getElementById('app-benefit').value,
+                appUser: document.getElementById('app-user').value,
+                appProblem: document.getElementById('app-problem').value,
+                appUnique: document.getElementById('app-unique').value,
+                pricingValue: document.getElementById('pricing-value').value,
+                savedAt: new Date().toISOString()
+            };
+            
+            painSliders.forEach(type => {
+                data.painScores[type] = document.getElementById(`pain-${type}`).value;
+            });
+            
+            localStorage.setItem('appValidatorProgress', JSON.stringify(data));
+            alert('Progress saved! Your validation data has been stored in this browser.');
+        });
+
+        // Load saved progress on page load
+        window.addEventListener('load', () => {
+            const saved = localStorage.getItem('appValidatorProgress');
+            if (saved) {
+                try {
+                    const data = JSON.parse(saved);
+                    
+                    // Restore idea checklist
+                    data.ideaChecked.forEach(point => {
+                        const item = ideaChecklist.querySelector(`[data-point="${point}"]`);
+                        if (item) {
+                            item.classList.add('checked');
+                            ideaChecked.add(point);
+                        }
+                    });
+                    updateIdeaScore();
+                    
+                    // Restore pain scores
+                    if (data.painScores) {
+                        painSliders.forEach(type => {
+                            if (data.painScores[type]) {
+                                const slider = document.getElementById(`pain-${type}`);
+                                slider.value = data.painScores[type];
+                                document.getElementById(`pain-${type}-value`).textContent = data.painScores[type];
+                            }
+                        });
+                        updatePainScore();
+                    }
+                    
+                    // Restore intent checklist
+                    data.intentChecked.forEach(point => {
+                        const item = intentChecklist.querySelector(`[data-point="${point}"]`);
+                        if (item) {
+                            item.classList.add('checked');
+                            intentChecked.add(point);
+                        }
+                    });
+                    updateIntentScore();
+                    
+                    // Restore copy inputs
+                    if (data.appName) document.getElementById('app-name').value = data.appName;
+                    if (data.appBenefit) document.getElementById('app-benefit').value = data.appBenefit;
+                    if (data.appUser) document.getElementById('app-user').value = data.appUser;
+                    if (data.appProblem) document.getElementById('app-problem').value = data.appProblem;
+                    if (data.appUnique) document.getElementById('app-unique').value = data.appUnique;
+                    generateCopy();
+                    
+                    // Restore pricing
+                    if (data.pricingValue) {
+                        document.getElementById('pricing-value').value = data.pricingValue;
+                        document.getElementById('pricing-value-display').textContent = `$${data.pricingValue}`;
+                    }
+                    
+                } catch (e) {
+                    console.error('Error loading saved progress:', e);
+                }
+            }
+        });
+
+        // Initialize scores
+        updateIdeaScore();
+        updatePainScore();
+        updateIntentScore();
+        updateFeatureCounts();
+    </script>
+</body>
+</html>
